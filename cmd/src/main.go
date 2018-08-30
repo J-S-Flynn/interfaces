@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 )
@@ -58,6 +59,21 @@ func getConection(url string) {
 		os.Exit(1)
 	}
 
-	fmt.Println(resp.Status)
+	//we are going to make a byte slice in a new way here, not the way we have seen before i.e bs := []byte{}
+	//make takes a type , in this case a byte and initalises it with 99999 elements inside it, so we could
+	//make a byte slice as aboove wich will grow and shrinc, but this will make an empty byte slice and make it n big
+	// bs := make([]byte, 99999)
+
+	//now we can get the responce body and use the read reciver on that passing in the byte slice that we created.
+	//the read function will then push the responce into the byte slice and we can then print out that bs by rappint it in a string
+	//conversion.
+	// resp.Body.Read(bs)
+	// fmt.Println(string(bs))
+	fmt.Println("\n\n new print out")
+
+	//however go has a lot of helper methods so we could simply write
+	io.Copy(os.Stdout, resp.Body)
+
+	//its importent to undertand that this is useing the writer interface rather than the read.
 
 }
