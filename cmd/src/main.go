@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+	"os"
+)
 
 type bot interface {
 	getGreating() string
@@ -21,21 +25,39 @@ func main() {
 
 	printGreating(eb)
 	printGreating(sb)
+
+	url := "http://google.com"
+
+	getConection(url)
+
 }
 
+//this func utalises the interface type bot. so once again we are infering the struct type
 func printGreating(b bot) {
 
 	fmt.Println(b.getGreating())
 }
 
 //not a great deal of custom logic in the two get greting funcs but there is enough for us to understand that
-//some functions need to be defined in a custom way
-func (eb englishBot) getGreating() string {
+//some functions need to be defined in a custom way. its also important to note that the recivers have no variable only a type
+func (englishBot) getGreating() string {
 
 	return "Hello there you beauties"
 }
 
-func (sp spanishBot) getGreating() string {
+func (spanishBot) getGreating() string {
 
 	return "Ola allí bellezas"
+}
+
+func getConection(url string) {
+
+	resp, error := http.Get(url)
+	if error != nil {
+		fmt.Println("no responce from the url")
+		os.Exit(1)
+	}
+
+	fmt.Println(resp.Status)
+
 }
