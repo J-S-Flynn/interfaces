@@ -91,6 +91,8 @@ func getConection(url string) {
 
 	lw := logWriter{}
 	io.Copy(lw, resp.Body)
+
+	fmt.Println("and thats an intro to interfaces")
 }
 
 //a writer interface must take a []byte and return and int and an error. we can use that information to create custome write functions
@@ -109,3 +111,9 @@ func (logWriter) Write(bs []byte) (int, error) {
 	fmt.Println("processed this many bytes : ", len(bs))
 	return len(bs), nil
 }
+
+//there is  agreat deal more that can be done with interfaces, but the saliant pionts to get started are these.
+//1. interfaces are implicit, you do not need to define the type, the interface can figuer it out.
+//2. you must satistfy the requirments of an interface in order to use it, it it takes and int nd returns an int, you ust also do so
+//   and you must name your func accordingly
+//3. even with the same name, the same imput type and output type you are not garanteed good code. garbage in garbage out
