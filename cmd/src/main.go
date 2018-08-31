@@ -11,15 +11,15 @@ type bot interface {
 	getGreating() string
 }
 
-//used for the writer func
-type badWriter struct{}
-type logWriter struct{}
-
 //the structs below have no unique fields to them but creating type englishBot and spanBot as a type struct allow
 //for the use or functions with them
 type englishBot struct{}
 
 type spanishBot struct{}
+
+//used for the writer func
+type badWriter struct{}
+type logWriter struct{}
 
 func main() {
 
